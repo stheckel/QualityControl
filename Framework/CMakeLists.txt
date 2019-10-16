@@ -119,6 +119,7 @@ set(EXE_SRCS
     src/runQC.cxx
     src/runBasic.cxx
     src/runTPCQCPID.cxx
+    src/runTPCQCTracksTest.cxx
     src/runAdvanced.cxx
     src/runReadout.cxx
     src/runMergerTest.cxx
@@ -133,6 +134,7 @@ set(EXE_NAMES
     o2-qc
     o2-qc-run-basic
     o2-qc-run-tpcpid
+    o2-qc-run-tpctt
     o2-qc-run-advanced
     o2-qc-run-readout
     o2-qc-run-merger-test
@@ -149,6 +151,7 @@ set(EXE_OLD_NAMES
     o2-qc-run-qc
     qcRunBasic
     qcRunTPCPID
+    qcRunTPCTT
     qcRunAdvanced
     qcRunReadout
     runMergerTest
@@ -341,6 +344,7 @@ install(FILES example-default.json
               dataDump.json
               basic.json
               tpcQCPID.json
+              tpcQCTracksTest.json
               basic-no-sampling.json
               advanced.json
               readout.json
