@@ -3,7 +3,7 @@
 add_library(QcTPC)
 
 target_sources(QcTPC PRIVATE src/PID.cxx
-	             PRIVATE src/TracksTest.cxx)
+	                     src/TracksTest.cxx)
 
 target_include_directories(
   QcTPC
@@ -39,4 +39,30 @@ foreach(test ${TEST_SRCS})
                         PRIVATE Boost::unit_test_framework)
   add_test(NAME ${test_name} COMMAND ${test_name})
   set_tests_properties(${test_name} PROPERTIES TIMEOUT 60)
+endforeach()
+
+# ---- Executables ----
+
+set(EXE_SRCS src/runTPCQCTracksTestMod.cxx)
+
+set(EXE_NAMES o2-qc-run-tpcttmod)
+
+list(LENGTH EXE_SRCS count)
+math(EXPR count "${count}-1")
+foreach(i RANGE ${count})
+  list(GET EXE_SRCS ${i} src)
+  list(GET EXE_NAMES ${i} name)
+  add_executable(${name} ${src})
+  target_link_libraries(${name} PRIVATE QualityControl CURL::libcurl)
+endforeach()
+
+# ---- Extra scripts ----
+
+install(FILES tpcQCTracksTestMod.json DESTINATION etc)
+
+get_property(dirs
+             DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+             PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  message(STATUS "dir='${dir}'")
 endforeach()
